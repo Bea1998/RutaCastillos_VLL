@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ruta por los castillos de Valladolid</title>
+        <meta name="viewport" content="width=device-width, 
+         initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+         <link rel="stylesheet" href="css/leaflet.css"> 
+         <script src="js/leaflet.js"></script>
+         <style>       
+         body { 
+             padding: 0; 
+             margin: 0; 
+             } 
+        #title {
+                position: fixed;
+                margin-top: 0;
+                top: 5px;
+                right:600px;
+                font-size: 2em;
+                font-family: "Open Sans", Helvetica, sans-serif;
+                letter-spacing: .04em;
+                padding: 5px 5px;
+                background-color: rgb(245, 248, 248) ;;
+                border: 1px solid red;
+                border-radius: px;
+                z-index: 450;
+            }
+            #description {
+                position: fixed;
+                bottom: 20px;
+                right: 10px;
+                width: 280px;
+                padding: 0px 15px;
+                background-color: rgba(255, 255, 255, 0.7);
+                border: 1px solid grey;
+                border-radius: 3px;
+                z-index: 800;
+            }
+        html, body, #map { 
+            height: 100%; 
+            width: 100%; 
+            }
+            .legend {
+            width: 300px;
+            font-size: 14px;
+            color: #333333;
+            font-family: "Open Sans", Helvetica, sans-serif;
+            padding: 10px 12px;
+            background-color: rgb(245, 248, 248) ;
+            box-shadow: 0 0 10px rgba(3, 3, );
+            border-radius: 15px;
+            border: 2px solid rgb(218, 13, 13);
+        }
+        .legend img {
+            width: 200px;
+            margin: auto;
+            display: block;
+        }
+     
+        </style>
+    </head>
+    <body>   
+        <h1 id="title">Ruta por los castillos de Valladolid</h1>
+        <div id="map"></div> 
+        <div id="description">
+            <center><b><u><h2>Leyenda</h2></u></center></b></center>
+            <p><center><img width='50' src="https://emojitool.com/img/facebook/4.0/european-castle-3655.png"></center></p>
+            <p><H3><center>Castillos que se visitan</center></H3> </p>
+            <p><center><img width='50' src="https://icones.pro/wp-content/uploads/2021/04/icone-trait-rouge.png"></center></p>
+            <p><center><h3>Ruta seguida</h3></center></p>
+        </div>
+        <script>
+        let sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'});   
+        let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
+            {attribution: '&copy; <a href="http://' + 
+            'www.openstreetmap.org/copyright">OpenStreetMap</a>'});
+            let map = L.map("map", {center: [41.643159, -4.725086], zoom: 10, layers: [sat,osm]});
+    let baseMaps = {
+        "Satélite": sat,
+        "Mapa": osm
+    };
+    
+    L.control.layers(baseMaps). addTo(map);
+    let castle = L.icon({
+                iconUrl: 'https://emojitool.com/img/facebook/4.0/european-castle-3655.png',
+                iconSize:     [40, 40], 
+                iconAnchor:   [20, 30], 
+                });
+        let castTrigueros = L.marker([41.828310, -4.649808],
+            {icon: castle}).addTo(map);
+        let castfuen = L.marker([41.706303, -4.767557],
+            {icon: castle}).addTo(map);
+        let castSimancas = L.marker([41.591965, -4.828789],
+            {icon: castle}).addTo(map);
+        let castTorrelobaton =  L.marker([41.650750, -5.025601],
+            {icon: castle}).addTo(map);   
+        let castMedina = L.marker([41.309043, -4.908513],
+            {icon: castle}).addTo(map);
+        let castIscar = L.marker([41.365144, -4.537406],
+            {icon: castle}).addTo(map);
+        let castPortillo = L.marker([41.479059, -4.587824],
+            {icon: castle}).addTo(map);      
+        let castPeñafiel = L.marker([41.596931, -4.114572], 
+            {icon: castle}).addTo(map);
+
+
+    let rutacastillos = L.polyline(
+[[41.828310, -4.649808], [41.706303, -4.767557], [41.591965, -4.828789],[41.650750, -5.025601],[41.309043, -4.908513],
+[41.365144, -4.537406],[41.479059, -4.587824],[41.596931, -4.114572]],
+{color: "red", weight: 4}
+).addTo(map);
+
+castTrigueros.bindPopup("<h2><u>Castillo de Trigueros del Valle <center>(S.XV)</center></u></h2><img width='250' height='200' src='https://upload.wikimedia.org/wikipedia/commons/b/bd/Castillo_de_Trigueros_del_Valle%2C_Valladolid%2C_Castilla._%28MAG%29.jpg'</p>");
+castfuen.bindPopup("<h2><u>Castillo de Fuensaldaña (S.XV)</u></h2><img width='300' height='200'src='https://upload.wikimedia.org/wikipedia/commons/f/f1/Fuensalda%C3%B1a_castillo_04_lou.jpg'</p>");
+castSimancas.bindPopup("<h2><u>Castillo de Simancas (S.XV)</u></h2><img src='images/simancas.jpg'</p>");
+castTorrelobaton.bindPopup("<h2><u>Castillo de Torrelobatón (S.XIII)</u></h2><img src='images/torrelob.jpg'</p>");
+castMedina.bindPopup("<h2><u>Castillo de Medina del Campo<center>(S.XIV)</center></u></h2><img src='images/medina.jpg'</p>");
+castIscar.bindPopup("<h2><u>Castillo de Íscar (S.XII)</u></h2><img src='images/iscar.jpg'</p>");
+castPortillo.bindPopup("<h2><u>Castillo de Portillo (S.XIV)</u></h2><img src='images/Portillo.jpg'</p>");
+castPeñafiel.bindPopup("<h2><u>Castillo de Peñafiel (S.XV)</u></h2><img src='images/peñafiel.jpg'</p>");
+
+let legend = L.control({position: "bottomleft"});
+legend.onAdd = function() {
+
+    let div = L.DomUtil.create("div", "legend");
+    div.innerHTML = 
+        '<center><H3><p><b><u>Ruta por los castillos de Valladolid</center></H3></u></b></p><hr>' +
+        '<justify><p>A continuación, se muestran los castillos más emblemáticos de la provincia de Valladolid, en Castilla y León, España.<justify></p>' +
+        'Los castillos visitados son:<br>' +
+        '<p><ul>' +
+        '<li>Castillo de Trigueros del Valle</li>'+
+        '<li>Castillo de Fuensaldaña</li>' +
+        '<li>Castillo de Simancas</li>' +
+        '<li>Castillo de Torrelobatón</li>' +
+        '<li>Castillo de Medina del Campo</li>' +
+        '<li>Castillo de íscar</li>' +
+        '<li>Castillo de Portillo</li>' +
+        '<li>Castillo de Peñafiel</li>' +
+        '</ul></p>' +
+        '<p>¿Sabrías decir de qué siglo es cada castillo? Descúbrelo haciendo click en cada uno de ellos.</p>'+
+        '<p>Si quieres conocer su historia <a href=https://www.viajarymuchomas.com/10-castillos-en-valladolid-como-diez-reyes target="_blank"/> pulsa aquí</a><hr>' +
+        '<img src="images/VLL.png">';      
+    return div;
+};
+legend.addTo(map);
+            </script> 
+</body> 
+</html>
